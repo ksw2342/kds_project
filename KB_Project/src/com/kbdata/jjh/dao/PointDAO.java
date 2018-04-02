@@ -9,6 +9,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONStringer;
+
 import com.kbdata.jjh.model.Point;
 
 public class PointDAO {
@@ -39,7 +41,7 @@ public class PointDAO {
 		if (jdbcConnection != null && !jdbcConnection.isClosed()) {
 			jdbcConnection.close();
 		}
-	}
+	}	
 	
 	//포인트 사용내역 등록
 	public boolean insertPoint(Point point) throws SQLException {

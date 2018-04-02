@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.kbdata.jjh.dao.PointDAO;
 import com.kbdata.jjh.dao.UserDAO;
 import com.kbdata.jjh.model.Point;
@@ -74,12 +75,19 @@ public class MyServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 	}
-
+		
 	private void listAllUser(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
+		
+		Gson gson = new Gson();
+				
 		List<User> listUser = userDao.listAllUser();
-		request.setAttribute("listUser", listUser);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/views/inqueryInputForm.jsp");
+		String test = gson.toJson(userDao.listAllUser());
+		System.out.println(test);
+		
+		request.setAttribute("listUser", test);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/views/gridtest.jsp");
+		//		RequestDispatcher dispatcher = request.getRequestDispatcher("/views/inqueryInputForm.jsp");
 		dispatcher.forward(request, response);
 	}
 

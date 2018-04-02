@@ -2,11 +2,6 @@ package com.kbdata.jjh.model;
 
 import java.util.Date;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-
-
 public class User {
 	private int u_id;
 	private String id;

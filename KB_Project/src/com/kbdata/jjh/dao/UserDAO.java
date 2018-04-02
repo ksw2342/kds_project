@@ -1,12 +1,15 @@
 package com.kbdata.jjh.dao;
 
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import org.json.JSONStringer;
 
 import com.kbdata.jjh.model.User;
 
@@ -15,6 +18,10 @@ public class UserDAO {
 	private String jdbcUsername;
 	private String jdbcPassword;
 	private java.sql.Connection jdbcConnection;
+	
+	public UserDAO() {
+		super();
+	}
 	
 	public UserDAO(String jdbcURL, String jdbcUsername, String jdbcPassword) {
 		this.jdbcURL = jdbcURL;
@@ -37,6 +44,36 @@ public class UserDAO {
 		if (jdbcConnection != null && !jdbcConnection.isClosed()) {
             jdbcConnection.close();
         }
+	}
+	
+	public JSONStringer getData() {
+		JSONStringer js = null;
+		try {
+			ResultSet rs=null;
+			String sql ="select * from user";
+			connect();
+			PreparedStatement statement = jdbcConnection.prepareStatement(sql);
+			rs = statement.executeQuery();
+			js = new JSONStringer();
+			js.array();
+			while(rs.next()) {
+				js.object().key("u_id").value(rs.getString("u_id"))
+							.key("id").value(rs.getString("id"))
+							.key("name").value(rs.getString("name"))
+							.key("phone").value(rs.getString("phone"))
+							.key("regidate").value(rs.getString("regidate"))
+							.key("cardnum").value(rs.getString("cardnum"))
+							.key("point").value(rs.getString("point"))
+							.endObject();
+			}
+			js.endArray();
+			
+			statement.close();
+			disconnect();
+		}catch(Exception e) {
+			System.out.println("::::SQL Error::::"+ e.getMessage());
+		}
+		return js;
 	}
 	
 	public List<User> listAllUser() throws SQLException{

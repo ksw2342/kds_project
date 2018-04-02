@@ -1,8 +1,5 @@
 package com.kbdata.jjh.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
 
 public class Point {
 
