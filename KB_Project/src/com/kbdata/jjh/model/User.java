@@ -12,17 +12,20 @@ public class User {
 	private String id;
 	private String name;
 	private String phone;
-	private Date regidate;
+	private String regidate;
 	private String cardnum;
 	private int point;
 	
+	public User() {
+		
+	}
 	public User(String id, String name, String phone) {
 		this.id = id;
 		this.name = name;
 		this.phone = phone;
 	}
 
-	public User(int u_id, String id, String name, String phone, Date regidate, String cardnum, int point) {
+	public User(int u_id, String id, String name, String phone, String regidate, String cardnum, int point) {
 		this.u_id = u_id;
 		this.id = id;
 		this.name = name;
@@ -64,11 +67,11 @@ public class User {
 		this.phone = phone;
 	}
 
-	public Date getRegidate() {
+	public String getRegidate() {
 		return regidate;
 	}
 
-	public void setRegidate(Date regidate) {
+	public void setRegidate(String regidate) {
 		this.regidate = regidate;
 	}
 
