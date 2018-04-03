@@ -16,6 +16,9 @@
 				<input type="date" name="start" /> <input type="date" name="end" />
 				<input type="submit" name="inquery" value="조회" />
 			</form>
+			<form action="<c:url value="/reqUser"/>" method="post">
+				<input type="submit" name="inquery" value="랜덤!" />
+			</form>
 		</h2>
 	</center>
 	<div align="center">
