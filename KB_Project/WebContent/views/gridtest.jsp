@@ -18,8 +18,12 @@
 
 </head>
 <body>
-    <c:out var="user" items="${listUser}"/>
-    <script type="text/javascript">
+    
+    <%String js1 = "${listUser}";
+    System.out.println(js1);
+    %>
+    
+<script type="text/javascript">
 //jqGrid 테이블
 
 $(document).ready(function(){
@@ -29,18 +33,18 @@ $(document).ready(function(){
     colNames:['u_id',
     		  'id',
               ﻿'name'﻿,
-              ﻿'Phone'﻿,
-              ﻿'regidate'﻿,
-              ﻿'cardnum'﻿,
+              ﻿'phone'﻿,
+              ﻿'regi_date'﻿,
+              ﻿'card_num'﻿,
               ﻿'point'﻿﻿],
     colModel:[
         // 서버단에서 작업한 Json 객체의 key값으로 컬럼값을 설정해주면 자동 읽어들임.
         {name:'u_id',     index:'u_id',  width:"120"},
         {name:'id',    index:'id',       width:"80"},              
         {name:'name',    index:'name',    width:"80" },
-        {name:'Phone',         index:'Phone',width:"120" },
-        {name:'regidate',         index:'regidate',         width:"100"},
-        {name:'cardnum',         index:'cardnum',          width:"120"},
+        {name:'phone',         index:'phone',width:"120" },
+        {name:'regi_date',         index:'regi_date',         width:"100"},
+        {name:'card_num',         index:'card_num',          width:"120"},
         {name:'point',          index:'point',        width:"110"}
         ],
     rowNum:      10,
@@ -53,7 +57,7 @@ $(document).ready(function(){
     });
 	
 	
-    var mydata = eval('<%=user%>');
+    var mydata = eval('<%=js1%>');
   	for(var j=0;j<=mydata.length;j++){
   		jQuery("#list").addRowData(j+1,mydata[j]);
   	}

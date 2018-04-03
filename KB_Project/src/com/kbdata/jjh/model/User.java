@@ -7,8 +7,8 @@ public class User {
 	private String id;
 	private String name;
 	private String phone;
-	private Date regidate;
-	private String cardnum;
+	private Date regi_date;
+	private String card_num;
 	private int point;
 	
 	public User(String id, String name, String phone) {
@@ -22,8 +22,8 @@ public class User {
 		this.id = id;
 		this.name = name;
 		this.phone = phone;
-		this.regidate = regidate;
-		this.cardnum = cardnum;
+		this.regi_date = regidate;
+		this.card_num = cardnum;
 		this.point = point;
 	}
 
@@ -59,20 +59,20 @@ public class User {
 		this.phone = phone;
 	}
 
-	public Date getRegidate() {
-		return regidate;
+	public Date getRegi_date() {
+		return regi_date;
 	}
 
-	public void setRegidate(Date regidate) {
-		this.regidate = regidate;
+	public void setRegi_date(Date regi_date) {
+		this.regi_date = regi_date;
 	}
 
-	public String getCardnum() {
-		return cardnum;
+	public String getCard_num() {
+		return card_num;
 	}
 
-	public void setCardnum(String cardnum) {
-		this.cardnum = cardnum;
+	public void setCard_num(String card_num) {
+		this.card_num = card_num;
 	}
 
 	public int getPoint() {

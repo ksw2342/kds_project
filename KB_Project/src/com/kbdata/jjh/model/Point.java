@@ -5,7 +5,7 @@ public class Point {
 
 	private int u_id; // 회원일련번호
 	private int a_num; // 매출승인번호
-	private int cardnum; // 카드번호
+	private int card_num; // 카드번호
 	private String a_date; // 승인일
 	private String a_time; // 승인시각
 	private int mem_store_num; // 가맹점번호
@@ -18,7 +18,7 @@ public class Point {
 			int point) {
 		this.u_id = u_id;
 		this.a_num = a_num;
-		this.cardnum = cardnum;
+		this.card_num = cardnum;
 		this.a_date = a_date;
 		this.a_time = a_time;
 		this.mem_store_num = mem_store_num;
@@ -39,10 +39,10 @@ public class Point {
 		this.a_num = a_num;
 	}
 	public int getCardnum() {
-		return cardnum;
+		return card_num;
 	}
-	public void setCardnum(int cardnum) {
-		this.cardnum = cardnum;
+	public void setCardnum(int card_num) {
+		this.card_num = card_num;
 	}
 	public String getA_date() {
 		return a_date;

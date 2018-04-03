@@ -6,18 +6,27 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="../css/vendor/bootstrap.min.css" type="text/css" rel="stylesheet">
+<link href="../css/vendor/font-awesome.min.css" type="text/css" rel="stylesheet">
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
+<link href="../css/jquery.bdt.min.css" type="text/css" rel="stylesheet">
+<link href="../css/style.css" type="text/css" rel="stylesheet">
 <title>Application</title>
 </head>
 <body>
-	<center>
-		<h1> Management</h1>
+<div class="container">
+    <div class="row">
+            <div class="box clearfix">
+            <h1> Management</h1>
 		<h2>
 			<form action="<c:url value="/list"/>" method="post">
 				<input type="date" name="start" /> <input type="date" name="end" />
 				<input type="submit" name="inquery" value="조회" />
 			</form>
 		</h2>
-	</center>
+            <div class="table-header"><div class="pull-left"></div></div>
+	
 	<div align="center">
 		<table border="1" cellpadding="5">
 			<caption>
