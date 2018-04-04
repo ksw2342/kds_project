@@ -11,12 +11,15 @@ public class User {
 	private String card_num;
 	private int point;
 	
+	public User() {
+		
+	}
 	public User(String id, String name, String phone) {
 		this.id = id;
 		this.name = name;
 		this.phone = phone;
 	}
-
+	
 	public User(int u_id, String id, String name, String phone, Date regi_date, String card_num, int point) {
 		this.u_id = u_id;
 		this.id = id;
@@ -26,7 +29,7 @@ public class User {
 		this.card_num = card_num;
 		this.point = point;
 	}
-
+	
 	public int getU_id() {
 		return u_id;
 	}
@@ -66,7 +69,7 @@ public class User {
 	public void setRegi_date(Date regi_date) {
 		this.regi_date = regi_date;
 	}
-
+	
 	public String getCard_num() {
 		return card_num;
 	}
