@@ -74,7 +74,7 @@ public class PointDAO {
       }
       
       //포인트 테이블에는 계산없이 insert
-      String sql ="insert into point(u_id, approval_num, card_num, approval_date, approval_time, mem_store_num, division, point) "
+      String sql ="insert into point(u_id, approval_num, card_num, approval_date, approval_time, store_num, sale_division, point) "
       		+ "values( '"+u_id+"' , '"+approval_num+"', '"+card_num+"', '"+approval_date+"', '"+approval_time+"', '"+store_num+"', '"+sale_division+"', '"+point+"')";
       
       connect();
@@ -138,12 +138,12 @@ public class PointDAO {
          int card_num = resultSet.getInt("card_num");
          String approval_date = resultSet.getString("approval_date");
          String approval_time = resultSet.getString("approval_time");
-         int mem_store_num = resultSet.getInt("store_num");
-         String division = resultSet.getString("division");
+         int store_num = resultSet.getInt("store_num");
+         String sale_division = resultSet.getString("sale_division");
          int point = resultSet.getInt("point");
       
 
-         Point Point = new Point(u_id, approval_num, card_num, approval_date, approval_time, mem_store_num, division, point);
+         Point Point = new Point(u_id, approval_num, card_num, approval_date, approval_time, store_num, sale_division, point);
          listPoint.add(Point);
       }
       
@@ -164,11 +164,11 @@ public class PointDAO {
                int card_num = resultSet.getInt("card_num");
                String approval_date = resultSet.getString("approval_date");
                String approval_time = resultSet.getString("approval_time");
-               int mem_store_num = resultSet.getInt("mem_store_num");
-               String division = resultSet.getString("division");
+               int store_num = resultSet.getInt("store_num");
+               String sale_division = resultSet.getString("sale_division");
                int point = resultSet.getInt("point");
                
-               Point Point = new Point(u_id, approval_num, card_num, approval_date, approval_time, mem_store_num, division, point);
+               Point Point = new Point(u_id, approval_num, card_num, approval_date, approval_time, store_num, sale_division, point);
                listPoint.add(Point);
             }
             
@@ -190,11 +190,11 @@ public class PointDAO {
                int card_num = resultSet.getInt("card_num");
                String approval_date = resultSet.getString("approval_date");
                String approval_time = resultSet.getString("approval_time");
-               int mem_store_num = resultSet.getInt("mem_store_num");
-               String division = resultSet.getString("division");
+               int store_num = resultSet.getInt("store_num");
+               String sale_division = resultSet.getString("sale_division");
                int point = resultSet.getInt("point");
                
-               Point Point = new Point(u_id, approval_num, card_num, approval_date, approval_time, mem_store_num, division, point);
+               Point Point = new Point(u_id, approval_num, card_num, approval_date, approval_time, store_num, sale_division, point);
                listPoint.add(Point);
             }
             
@@ -216,11 +216,11 @@ public class PointDAO {
                int card_num = resultSet.getInt("card_num");
                String approval_date = resultSet.getString("approval_date");
                String approval_time = resultSet.getString("approval_time");
-               int mem_store_num = resultSet.getInt("mem_store_num");
-               String division = resultSet.getString("division");
+               int stroe_num = resultSet.getInt("stroe_num");
+               String sale_division = resultSet.getString("sale_division");
                int point = resultSet.getInt("point");
                
-               Point Point = new Point(u_id, approval_num, card_num, approval_date, approval_time, mem_store_num, division, point);
+               Point Point = new Point(u_id, approval_num, card_num, approval_date, approval_time, stroe_num, sale_division, point);
                listPoint.add(Point);
             }
             

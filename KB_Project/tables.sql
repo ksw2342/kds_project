@@ -20,6 +20,16 @@ USED_POINT BIGINT NOT NULL,
 SALE_DIVISION VARCHAR(2) NOT NULL, 
 PRIMARY KEY (U_ID, APPROVAL_NUM) );
 
+create table point(
+u_id int NOT NULL ,
+approval_num int NOT NULL PRIMARY KEY,
+card_num bigint NOT NULL,
+approval_date date,
+approval_time datetime,
+store_num bigint(50) NOT NULL,
+sale_division varchar(2) NOT NULL,
+point int NOT NULL
+);
 
 insert into user(id,name,phone,regi_date,card_num,point)
 values('kb1','±è»ó¿ì','01012345678',now(),4037111111111111 + RAND() * 888888888888,10000000);

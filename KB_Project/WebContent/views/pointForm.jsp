@@ -39,17 +39,17 @@
 				<c:forEach var="list" items="${listPoint}">
 					<tr style="display: none;">
 						<td><c:out value="${list.u_id}" /></td>
-						<td><c:out value="${list.a_num}" /></td>
-						<td><c:out value="${list.cardnum}" /></td>
-						<td><c:out value="${list.a_date}" /></td>
-						<td><c:out value="${list.a_time}" /></td>
-						<td><c:out value="${list.mem_store_num}" /></td>
+						<td><c:out value="${list.approval_num}" /></td>
+						<td><c:out value="${list.card_num}" /></td>
+						<td><c:out value="${list.approval_date}" /></td>
+						<td><c:out value="${list.approval_time}" /></td>
+						<td><c:out value="${list.store_num}" /></td>
 						<td>
 						<c:choose>
-					        <c:when test="${list.division == 00}">
+					        <c:when test="${list.sale_division == 00}">
 					           차감
 					       </c:when>
-					        <c:when test="${list.division == 01}">
+					        <c:when test="${list.sale_division == 01}">
 					           복원
 					       </c:when>
 					    </c:choose>
