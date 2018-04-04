@@ -15,120 +15,96 @@ public class UserDAO {
 	private String jdbcUsername;
 	private String jdbcPassword;
 	private java.sql.Connection jdbcConnection;
-
+	
 	public UserDAO(String jdbcURL, String jdbcUsername, String jdbcPassword) {
 		this.jdbcURL = jdbcURL;
 		this.jdbcUsername = jdbcUsername;
 		this.jdbcPassword = jdbcPassword;
 	}
-
+	
 	public void connect() throws SQLException {
-		if (jdbcConnection == null || jdbcConnection.isClosed()) {
+		if(jdbcConnection == null || jdbcConnection.isClosed()) {
 			try {
 				Class.forName("org.mariadb.jdbc.Driver");
-			} catch (ClassNotFoundException e) {
+			}catch(ClassNotFoundException e) {
 				throw new SQLException(e);
 			}
 			jdbcConnection = DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword);
 		}
 	}
-
+	
 	public void disconnect() throws SQLException {
 		if (jdbcConnection != null && !jdbcConnection.isClosed()) {
-			jdbcConnection.close();
-		}
+            jdbcConnection.close();
+        }
 	}
-
-	public List<User> listAllUser() throws SQLException {
+	
+	public List<User> listAllUser() throws SQLException{
 		List<User> listUser = new ArrayList<>();
 		String sql = "select u_id, id, name, phone, regidate, cast(cardnum as character) as cardnum, point from user";
-
+		
 		connect();
-
+		
 		Statement statement = jdbcConnection.createStatement();
 		ResultSet resultSet = statement.executeQuery(sql);
-
-		while (resultSet.next()) {
+		
+		while(resultSet.next()) {
 			int u_id = resultSet.getInt("u_id");
 			String id = resultSet.getString("id");
 			String name = resultSet.getString("name");
 			String phone = resultSet.getString("phone");
-			String regidate = resultSet.getString("regidate");
+			Date regidate = resultSet.getDate("regidate");
 			String cardnum = resultSet.getString("cardnum");
 			int point = resultSet.getInt("point");
-
-			User user = new User(u_id, id, name, phone, regidate, cardnum, point);
+			
+			User user = new User(u_id,id,name,phone,regidate,cardnum,point);
 			listUser.add(user);
 		}
-
+		
 		return listUser;
 	}
+	
 
 	public List<User> listUserByDate(String start, String end) throws SQLException {
 		List<User> listUser = new ArrayList<>();
 		String sql = "select u_id, id, name, phone, regidate, cast(cardnum as character) as cardnum, point from user"
-				+ " where regidate between '" + start + "' and '" + end + "'";
-
+				+ " where regidate between '"+start+"' and '"+end+"'";
+		
 		connect();
-
+		
 		Statement statement = jdbcConnection.createStatement();
 		ResultSet resultSet = statement.executeQuery(sql);
-
-		while (resultSet.next()) {
+		
+		while(resultSet.next()) {
 			int u_id = resultSet.getInt("u_id");
 			String id = resultSet.getString("id");
 			String name = resultSet.getString("name");
 			String phone = resultSet.getString("phone");
-			String regidate = resultSet.getString("regidate");
+			Date regidate = resultSet.getDate("regidate");
 			String cardnum = resultSet.getString("cardnum");
 			int point = resultSet.getInt("point");
-
-			User user = new User(u_id, id, name, phone, regidate, cardnum, point);
+			
+			User user = new User(u_id,id,name,phone,regidate,cardnum,point);
 			listUser.add(user);
 		}
-
+		
 		return listUser;
 	}
-
-	public void insertUser(User newUser) throws SQLException {
+	
+	
+	public void insertUser(User newUser) throws SQLException{
 		// TODO Auto-generated method stub
 		String id = newUser.getId();
 		String name = newUser.getName();
 		String phone = newUser.getPhone();
-		String sql = "insert into user(id,name,phone,regidate,cardnum,point) values('" + id + "','" + name + "','"
-				+ phone + "',curdate(),4037111111111111 + RAND() * 888888888888,10000000)";
-
+		String sql ="insert into user(id,name,phone,regidate,cardnum,point) values('"+id+"','"+name+"','"+phone+"',curdate(),4037111111111111 + RAND() * 888888888888,10000000)";
+		
 		connect();
-
+		
 		Statement statement = jdbcConnection.createStatement();
 		statement.execute(sql);
-
-	}
-
-	public User getUserByUid(int uid) throws SQLException {
-		User user = null;
-		String sql = "select u_id, id, name, phone, regidate, cast(cardnum as character) as cardnum, point from user"
-				+ " where u_id = " + uid;
-
-		connect();
-
-		Statement statement = jdbcConnection.createStatement();
-		ResultSet resultSet = statement.executeQuery(sql);
-
-		while (resultSet.next()) {
-			int u_id = resultSet.getInt("u_id");
-			String id = resultSet.getString("id");
-			String name = resultSet.getString("name");
-			String phone = resultSet.getString("phone");
-			String regidate = resultSet.getString("regidate");
-			String cardnum = resultSet.getString("cardnum");
-			int point = resultSet.getInt("point");
-
-			user = new User(u_id, id, name, phone, regidate, cardnum, point);
-			
-		}
 		
-		return user;
 	}
 
+	
 }
