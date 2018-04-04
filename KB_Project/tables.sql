@@ -10,6 +10,17 @@ card_num bigint NOT NULL,
 point bigint NOT NULL );
 ALTER TABLE user AUTO_INCREMENT=20000000;
 
+CREATE TABLE POINT (
+U_ID INT(8) NOT NULL,
+APPROVAL_NUM INT(8) NOT NULL, 
+APPROVAL_DATE DATE NOT NULL, 
+APPROVAL_TIME DATETIME NOT NULL, 
+STORE_NUM BIGINT NOT NULL, 
+USED_POINT BIGINT NOT NULL, 
+SALE_DIVISION VARCHAR(2) NOT NULL, 
+PRIMARY KEY (U_ID, APPROVAL_NUM) );
+
+
 insert into user(id,name,phone,regi_date,card_num,point)
 values('kb1','±è»ó¿ì','01012345678',now(),4037111111111111 + RAND() * 888888888888,10000000);
 insert into user(id,name,phone,regi_date,card_num,point) 

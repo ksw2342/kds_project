@@ -48,12 +48,12 @@ public class PointDAO {
 	   System.out.println("insertPoint() 호출됨");
    
       int u_id = newPoint.getU_id(); 
-      int a_num = newPoint.getA_num();
-      int cardnum = newPoint.getCardnum(); 
-      String a_date = newPoint.getA_date();
-      String a_time = newPoint.getA_time();
-      int mem_store_num = newPoint.getMem_store_num(); 
-      String division = newPoint.getDivision();
+      int approval_num = newPoint.getApproval_num();
+      int card_num = newPoint.getCard_num(); 
+      String approval_date = newPoint.getApproval_date();
+      String approval_time = newPoint.getApproval_time();
+      int store_num = newPoint.getStore_num(); 
+      String sale_division = newPoint.getSale_division();
       int point = newPoint.getPoint();
       
       System.out.println("getPrevPoint()");
@@ -62,7 +62,7 @@ public class PointDAO {
       System.out.println("prev_point : " + prev_point);
       int after_point = 0;
       
-      if(division.equals("00")) {//차감
+      if(sale_division.equals("00")) {//차감
          after_point = prev_point - point;
          updateUserPoint(u_id, after_point);
          System.out.println("결과 : "+ point +"원 차감 후 " + after_point);
@@ -74,8 +74,8 @@ public class PointDAO {
       }
       
       //포인트 테이블에는 계산없이 insert
-      String sql ="insert into point(u_id, a_num, cardnum, a_date, a_time, mem_store_num, division, point) "
-      		+ "values( '"+u_id+"' , '"+a_num+"', '"+cardnum+"', '"+a_date+"', '"+a_time+"', '"+mem_store_num+"', '"+division+"', '"+point+"')";
+      String sql ="insert into point(u_id, approval_num, card_num, approval_date, approval_time, mem_store_num, division, point) "
+      		+ "values( '"+u_id+"' , '"+approval_num+"', '"+card_num+"', '"+approval_date+"', '"+approval_time+"', '"+store_num+"', '"+sale_division+"', '"+point+"')";
       
       connect();
       
@@ -134,16 +134,16 @@ public class PointDAO {
       
       while (resultSet.next()) {
          int u_id = resultSet.getInt("u_id");
-         int a_num = resultSet.getInt("a_num");
-         int cardnum = resultSet.getInt("cardnum");
-         String a_date = resultSet.getString("a_date");
-         String a_time = resultSet.getString("a_time");
-         int mem_store_num = resultSet.getInt("mem_store_num");
+         int approval_num = resultSet.getInt("approval_num");
+         int card_num = resultSet.getInt("card_num");
+         String approval_date = resultSet.getString("approval_date");
+         String approval_time = resultSet.getString("approval_time");
+         int mem_store_num = resultSet.getInt("store_num");
          String division = resultSet.getString("division");
          int point = resultSet.getInt("point");
       
 
-         Point Point = new Point(u_id, a_num, cardnum, a_date, a_time, mem_store_num, division, point);
+         Point Point = new Point(u_id, approval_num, card_num, approval_date, approval_time, mem_store_num, division, point);
          listPoint.add(Point);
       }
       
@@ -151,7 +151,7 @@ public class PointDAO {
    }
       public List<Point> listPointByDate(String start, String end) throws SQLException {
             List<Point> listPoint = new ArrayList<>();
-            String sql = "select * from point"+ " where a_date between '"+start+"' and '"+end+"'";
+            String sql = "select * from point"+ " where approval_date between '"+start+"' and '"+end+"'";
             
             connect();
             
@@ -160,15 +160,15 @@ public class PointDAO {
             
             while (resultSet.next()) {
                int u_id = resultSet.getInt("u_id");
-               int a_num = resultSet.getInt("a_num");
-               int cardnum = resultSet.getInt("cardnum");
-               String a_date = resultSet.getString("a_date");
-               String a_time = resultSet.getString("a_time");
+               int approval_num = resultSet.getInt("approval_num");
+               int card_num = resultSet.getInt("card_num");
+               String approval_date = resultSet.getString("approval_date");
+               String approval_time = resultSet.getString("approval_time");
                int mem_store_num = resultSet.getInt("mem_store_num");
                String division = resultSet.getString("division");
                int point = resultSet.getInt("point");
                
-               Point Point = new Point(u_id, a_num, cardnum, a_date, a_time, mem_store_num, division, point);
+               Point Point = new Point(u_id, approval_num, card_num, approval_date, approval_time, mem_store_num, division, point);
                listPoint.add(Point);
             }
             
@@ -186,15 +186,15 @@ public class PointDAO {
             
             while (resultSet.next()) {
                int u_id = resultSet.getInt("u_id");
-               int a_num = resultSet.getInt("a_num");
-               int cardnum = resultSet.getInt("cardnum");
-               String a_date = resultSet.getString("a_date");
-               String a_time = resultSet.getString("a_time");
+               int approval_num = resultSet.getInt("approval_num");
+               int card_num = resultSet.getInt("card_num");
+               String approval_date = resultSet.getString("approval_date");
+               String approval_time = resultSet.getString("approval_time");
                int mem_store_num = resultSet.getInt("mem_store_num");
                String division = resultSet.getString("division");
                int point = resultSet.getInt("point");
                
-               Point Point = new Point(u_id, a_num, cardnum, a_date, a_time, mem_store_num, division, point);
+               Point Point = new Point(u_id, approval_num, card_num, approval_date, approval_time, mem_store_num, division, point);
                listPoint.add(Point);
             }
             
@@ -203,7 +203,7 @@ public class PointDAO {
          
          public List<Point> listPointByIdAndDate(String uid, String start, String end) throws SQLException {
             List<Point> listPoint = new ArrayList<>();
-            String sql = "select * from point where u_id = '"+uid+"' and a_date between '"+start+"' and '"+end+"'";
+            String sql = "select * from point where u_id = '"+uid+"' and approval_date between '"+start+"' and '"+end+"'";
             
             connect();
             
@@ -212,15 +212,15 @@ public class PointDAO {
             
             while (resultSet.next()) {
                int u_id = resultSet.getInt("u_id");
-               int a_num = resultSet.getInt("a_num");
-               int cardnum = resultSet.getInt("cardnum");
-               String a_date = resultSet.getString("a_date");
-               String a_time = resultSet.getString("a_time");
+               int approval_num = resultSet.getInt("approval_num");
+               int card_num = resultSet.getInt("card_num");
+               String approval_date = resultSet.getString("approval_date");
+               String approval_time = resultSet.getString("approval_time");
                int mem_store_num = resultSet.getInt("mem_store_num");
                String division = resultSet.getString("division");
                int point = resultSet.getInt("point");
                
-               Point Point = new Point(u_id, a_num, cardnum, a_date, a_time, mem_store_num, division, point);
+               Point Point = new Point(u_id, approval_num, card_num, approval_date, approval_time, mem_store_num, division, point);
                listPoint.add(Point);
             }
             
