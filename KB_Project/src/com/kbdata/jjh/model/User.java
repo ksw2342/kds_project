@@ -8,13 +8,27 @@ public class User {
 	private String name;
 	private String phone;
 	private Date regi_date;
+	private String s_regi_date;
 	private String card_num;
 	private int point;
 	
+	public User() {
+		
+	}
 	public User(String id, String name, String phone) {
 		this.id = id;
 		this.name = name;
 		this.phone = phone;
+	}
+	
+	public User(int u_id, String id, String name, String phone, String regi_date, String card_num, int point) {
+		this.u_id = u_id;
+		this.id = id;
+		this.name = name;
+		this.phone = phone;
+		this.s_regi_date = regi_date;
+		this.card_num = card_num;
+		this.point = point;
 	}
 
 	public User(int u_id, String id, String name, String phone, Date regi_date, String card_num, int point) {
@@ -26,7 +40,7 @@ public class User {
 		this.card_num = card_num;
 		this.point = point;
 	}
-
+	
 	public int getU_id() {
 		return u_id;
 	}
@@ -65,6 +79,14 @@ public class User {
 
 	public void setRegi_date(Date regi_date) {
 		this.regi_date = regi_date;
+	}
+	
+	public String getS_regi_date() {
+		return s_regi_date;
+	}
+	
+	public void setS_regi_date(String s_regi_date) {
+		this.s_regi_date = s_regi_date;
 	}
 
 	public String getCard_num() {
