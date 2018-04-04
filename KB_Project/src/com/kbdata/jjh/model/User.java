@@ -2,18 +2,14 @@ package com.kbdata.jjh.model;
 
 import java.util.Date;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-
-
 public class User {
 	private int u_id;
 	private String id;
 	private String name;
 	private String phone;
-	private Date regidate;
-	private String cardnum;
+	private Date regi_date;
+	private String s_regi_date;
+	private String card_num;
 	private int point;
 	
 	public User(String id, String name, String phone) {
@@ -21,17 +17,26 @@ public class User {
 		this.name = name;
 		this.phone = phone;
 	}
-
-	public User(int u_id, String id, String name, String phone, Date regidate, String cardnum, int point) {
+	public User(int u_id, String id, String name, String phone, String regi_date, String card_num, int point) {
 		this.u_id = u_id;
 		this.id = id;
 		this.name = name;
 		this.phone = phone;
-		this.regidate = regidate;
-		this.cardnum = cardnum;
+		this.s_regi_date = regi_date;
+		this.card_num = card_num;
 		this.point = point;
 	}
 
+	public User(int u_id, String id, String name, String phone, Date regi_date, String card_num, int point) {
+		this.u_id = u_id;
+		this.id = id;
+		this.name = name;
+		this.phone = phone;
+		this.regi_date = regi_date;
+		this.card_num = card_num;
+		this.point = point;
+	}
+	
 	public int getU_id() {
 		return u_id;
 	}
@@ -63,21 +68,28 @@ public class User {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-
-	public Date getRegidate() {
-		return regidate;
+	public Date getRegi_date() {
+		return regi_date;
 	}
 
-	public void setRegidate(Date regidate) {
-		this.regidate = regidate;
+	public void setRegi_date(Date regi_date) {
+		this.regi_date = regi_date;
+	}
+	
+	public String getS_regi_date() {
+		return s_regi_date;
+	}
+	
+	public void setS_regi_date(String s_regi_date) {
+		this.s_regi_date = s_regi_date;
 	}
 
-	public String getCardnum() {
-		return cardnum;
+	public String getCard_num() {
+		return card_num;
 	}
 
-	public void setCardnum(String cardnum) {
-		this.cardnum = cardnum;
+	public void setCard_num(String card_num) {
+		this.card_num = card_num;
 	}
 
 	public int getPoint() {

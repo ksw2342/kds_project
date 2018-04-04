@@ -1,8 +1,11 @@
 package com.kbdata.jjh.controller;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Random;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,6 +13,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.json.JSONObject;
+
+import com.goebl.david.Response;
+import com.goebl.david.Webb;
+import com.google.gson.*;
 
 import com.kbdata.jjh.dao.PointDAO;
 import com.kbdata.jjh.dao.UserDAO;
@@ -70,13 +79,56 @@ public class MyServlet extends HttpServlet {
 			throw new ServletException(ex);
 		}
 	}
+	
+	// TNDM �� �������� �޼ҵ� 
+	private void test(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		// TODO Auto-generated method stub
+		BufferedReader input = new BufferedReader(new InputStreamReader(request.getInputStream()));
+		StringBuilder builder = new StringBuilder();
+		String buffer;
+		while ((buffer = input.readLine()) != null) {
+			if (builder.length() > 0) {
+				builder.append("\n");
+			}
+			builder.append(buffer);
+		}
+		String jsonUser = builder.toString();
+		System.out.println(jsonUser);
+		Gson gson = new Gson();
+		User user = gson.fromJson(jsonUser, User.class);
+		System.out.println(user.getName());
+	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 	}
 
+	private void getRandUserByUid(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException, SQLException {
+		Random rand = new Random();
+		int uid = rand.nextInt(8)+2000000;
+		
+		User user = userDao.getUserByUid(uid);
+		
+		Gson gson = new Gson();
+//		JSONObject jsonUser = new JSONObject(gson.toJson(user));
+		String stringUser = gson.toJson(user);
+		
+		
+		
+		System.out.println(stringUser);
+
+		Webb webb = Webb.create();
+		Response<String> result = webb.post("http://192.168.0.40:8080/test/")
+		    .useCaches(false)
+		    .body(stringUser)
+		    .asString();
+		System.out.println(result.getBody());
+	}
+	
 	private void listAllUser(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
+		
 		List<User> listUser = userDao.listAllUser();
 		request.setAttribute("listUser", listUser);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/views/inqueryInputForm.jsp");
@@ -143,18 +195,4 @@ public class MyServlet extends HttpServlet {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/views/pointForm.jsp");
 		dispatcher.forward(request, response);
 	}
-
-	// private void updateBook(HttpServletRequest request, HttpServletResponse
-	// response)
-	// throws SQLException, IOException {
-	// int id = Integer.parseInt(request.getParameter("id"));
-	// String title = request.getParameter("title");
-	// String author = request.getParameter("author");
-	// float price = Float.parseFloat(request.getParameter("price"));
-	//
-	// Book book = new Book(id, title, author, price);
-	// bookDAO.updateBook(book);
-	// response.sendRedirect("list");
-	// }
-
 }
