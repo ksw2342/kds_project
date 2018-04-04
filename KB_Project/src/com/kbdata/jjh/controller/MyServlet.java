@@ -18,143 +18,182 @@ import com.kbdata.jjh.model.User;
 
 @WebServlet("/MyServlet")
 public class MyServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-	private UserDAO userDao;
-	private PointDAO pointDao;
+   private static final long serialVersionUID = 1L;
+   private UserDAO userDao;
+   private PointDAO pointDao;
 
-	public void init() {
-		String jdbcURL = getServletContext().getInitParameter("jdbcURL");
-		String jdbcUsername = getServletContext().getInitParameter("jdbcUsername");
-		String jdbcPassword = getServletContext().getInitParameter("jdbcPassword");
+   public void init() {
+      String jdbcURL = getServletContext().getInitParameter("jdbcURL");
+      String jdbcUsername = getServletContext().getInitParameter("jdbcUsername");
+      String jdbcPassword = getServletContext().getInitParameter("jdbcPassword");
 
-		userDao = new UserDAO(jdbcURL, jdbcUsername, jdbcPassword);
-		pointDao = new PointDAO(jdbcURL, jdbcUsername, jdbcPassword);
-	}
+      userDao = new UserDAO(jdbcURL, jdbcUsername, jdbcPassword);
+      pointDao = new PointDAO(jdbcURL, jdbcUsername, jdbcPassword);
+   }
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		String action = request.getServletPath();
+   protected void doPost(HttpServletRequest request, HttpServletResponse response)
+         throws ServletException, IOException {
+      String action = request.getServletPath();
 
-		try {
-			switch (action) {
-			case "/input":
-				insertUser(request, response);
-				break;
-			case "/list":
-				if (request.getParameter("start").isEmpty()) {
-					listAllUser(request, response);
-				} else {
-					listUserByDate(request, response);
-					System.out.println(request.getParameter("start") + " ~ " + request.getParameter("end"));
-				}
-				break;
-			case "/point":
-				if (request.getParameter("uid").isEmpty()) {
-					if (request.getParameter("start").isEmpty()) {
-						listAllPoint(request, response);
-					} else {
-						listPointByDate(request, response);
-					}
-				} 
-				else {
-					if (request.getParameter("start").isEmpty()) {
-						listPointById(request, response);
-					} else {
-						listPointByIdAndDate(request, response);
-					}
-				}
+      try {
+         switch (action) {
+         case "/input":
+        	insertUser(request, response);
+            break;
+         case "/list":
+            if (request.getParameter("start").isEmpty()) {
+               listAllUser(request, response);
+            } else {
+               listUserByDate(request, response);
+               System.out.println(request.getParameter("start") + " ~ " + request.getParameter("end"));
+            }
+            break;
+         case "/point":
+            if (request.getParameter("uid").isEmpty()) {
+               if (request.getParameter("start").isEmpty()) {
+                  listAllPoint(request, response);
+               } else {
+                  listPointByDate(request, response);
+               }
+            } 
+            else {
+               if (request.getParameter("start").isEmpty()) {
+                  listPointById(request, response);
+               } else {
+                  listPointByIdAndDate(request, response);
+               }
+            }
+            break;
+         case "/tndm_req":
+        	 insertPoint(request, response);
+        	 break;
+         }
+      } catch (SQLException ex) {
+         throw new ServletException(ex);
+      }
+   }
 
-				break;
-			}
-		} catch (SQLException ex) {
-			throw new ServletException(ex);
-		}
-	}
+   private void updateUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+	// TODO Auto-generated method stub
+	  String id = request.getParameter("id");
+	  String name = request.getParameter("name");
+	  String phone = request.getParameter("phone");
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-	}
+	  userDao.updateUser(id, name, phone);
+}
 
-	private void listAllUser(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, IOException, ServletException {
-		List<User> listUser = userDao.listAllUser();
-		request.setAttribute("listUser", listUser);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/views/inqueryInputForm.jsp");
-		dispatcher.forward(request, response);
-	}
+protected void doGet(HttpServletRequest request, HttpServletResponse response)
+         throws ServletException, IOException {
+   }
 
-	private void listUserByDate(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, IOException, ServletException {
-		String start = request.getParameter("start");
-		String end = request.getParameter("end");
+   private void listAllUser(HttpServletRequest request, HttpServletResponse response)
+         throws SQLException, IOException, ServletException {
+      List<User> listUser = userDao.listAllUser();
+      request.setAttribute("listUser", listUser);
+      RequestDispatcher dispatcher = request.getRequestDispatcher("/views/inqueryInputForm.jsp");
+      dispatcher.forward(request, response);
+   }
 
-		List<User> listUser = userDao.listUserByDate(start, end);
-		request.setAttribute("listUser", listUser);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/views/inqueryInputForm.jsp");
-		dispatcher.forward(request, response);
-	}
+   private void listUserByDate(HttpServletRequest request, HttpServletResponse response)
+         throws SQLException, IOException, ServletException {
+      String start = request.getParameter("start");
+      String end = request.getParameter("end");
 
-	private void insertUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
-		String id = request.getParameter("id");
-		String name = request.getParameter("name");
-		String phone = request.getParameter("phone");
+      List<User> listUser = userDao.listUserByDate(start, end);
+      request.setAttribute("listUser", listUser);
+      RequestDispatcher dispatcher = request.getRequestDispatcher("/views/inqueryInputForm.jsp");
+      dispatcher.forward(request, response);
+   }
 
-		User newUser = new User(id, name, phone);
-		userDao.insertUser(newUser);
-	}
+   private void insertUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+      String id = request.getParameter("id");
+      String name = request.getParameter("name");
+      String phone = request.getParameter("phone");
 
-	private void listAllPoint(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, IOException, ServletException {
-		List<Point> listPoint = pointDao.listAllPoints();
-		request.setAttribute("listPoint", listPoint);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/views/pointForm.jsp");
-		dispatcher.forward(request, response);
-	}
+      User newUser = new User(id, name, phone);
+      userDao.insertUser(newUser);
+   }
+   
+   private void insertPoint(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+	   
+/*	  	int u_id = (int) request.getAttribute("u_id");
+	  	int a_num = (int) request.getAttribute("a_num");
+		int cardnum = (int) request.getAttribute("cardnum");
+		String a_date = request.getParameter("a_date"); 
+		String a_time = request.getParameter("a_time");  
+		int mem_store_num = (int) request.getAttribute("mem_store_num");
+		String division = request.getParameter("division");  
+		int point = (int) request.getAttribute("point"); 
 
-	private void listPointByDate(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, IOException, ServletException {
-		String start = request.getParameter("start");
-		String end = request.getParameter("end");
+	   Point newPoint = new Point(u_id, a_num, cardnum, a_date, a_time, mem_store_num, division, point);*/
+	   Point newPoint = new Point(2000000,1210, 66666, "1990-06-24", "1992-11-11 00:00:00", 333, "00", 40000);
+	   
+	   pointDao.insertPoint(newPoint);
+	    
+   }
 
-		List<Point> listPoint = pointDao.listPointByDate(start, end);
-		request.setAttribute("listPoint", listPoint);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/views/pointForm.jsp");
-		dispatcher.forward(request, response);
-	}
+   private void listAllPoint(HttpServletRequest request, HttpServletResponse response)
+         throws SQLException, IOException, ServletException {
+      List<Point> listPoint = pointDao.listAllPoints();
+      request.setAttribute("listPoint", listPoint);
+      RequestDispatcher dispatcher = request.getRequestDispatcher("/views/pointForm.jsp");
+      dispatcher.forward(request, response);
+   }
 
-	private void listPointById(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, IOException, ServletException {
-		String uid = request.getParameter("uid");
+   private void listPointByDate(HttpServletRequest request, HttpServletResponse response)
+         throws SQLException, IOException, ServletException {
+      String start = request.getParameter("start");
+      String end = request.getParameter("end");
 
-		List<Point> listPoint = pointDao.listPointById(uid);
-		request.setAttribute("listPoint", listPoint);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/views/pointForm.jsp");
-		dispatcher.forward(request, response);
-	}
+      List<Point> listPoint = pointDao.listPointByDate(start, end);
+      request.setAttribute("listPoint", listPoint);
+      RequestDispatcher dispatcher = request.getRequestDispatcher("/views/pointForm.jsp");
+      dispatcher.forward(request, response);
+   }
 
-	private void listPointByIdAndDate(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, IOException, ServletException {
-		String uid = request.getParameter("uid");
-		String start = request.getParameter("start");
-		String end = request.getParameter("end");
+   private void listPointById(HttpServletRequest request, HttpServletResponse response)
+         throws SQLException, IOException, ServletException {
+      String uid = request.getParameter("uid");
 
-		List<Point> listPoint = pointDao.listPointByIdAndDate(uid, start, end);
-		request.setAttribute("listPoint", listPoint);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/views/pointForm.jsp");
-		dispatcher.forward(request, response);
-	}
+      List<Point> listPoint = pointDao.listPointById(uid);
+      request.setAttribute("listPoint", listPoint);
+      RequestDispatcher dispatcher = request.getRequestDispatcher("/views/pointForm.jsp");
+      dispatcher.forward(request, response);
+   }
 
-	// private void updateBook(HttpServletRequest request, HttpServletResponse
-	// response)
-	// throws SQLException, IOException {
-	// int id = Integer.parseInt(request.getParameter("id"));
-	// String title = request.getParameter("title");
-	// String author = request.getParameter("author");
-	// float price = Float.parseFloat(request.getParameter("price"));
-	//
-	// Book book = new Book(id, title, author, price);
-	// bookDAO.updateBook(book);
-	// response.sendRedirect("list");
-	// }
+   private void listPointByIdAndDate(HttpServletRequest request, HttpServletResponse response)
+         throws SQLException, IOException, ServletException {
+      String uid = request.getParameter("uid");
+      String start = request.getParameter("start");
+      String end = request.getParameter("end");
+
+      List<Point> listPoint = pointDao.listPointByIdAndDate(uid, start, end);
+      request.setAttribute("listPoint", listPoint);
+      RequestDispatcher dispatcher = request.getRequestDispatcher("/views/pointForm.jsp");
+      dispatcher.forward(request, response);
+   }
+   
+   private void updatePointByDiv(HttpServletRequest request, HttpServletResponse response)
+         throws SQLException, IOException, ServletException {
+      String uid = request.getParameter("sales_division");
+
+      //pointDao.updatePointByDiv(sales_division);
+      //request.setAttribute("sales_division", listPoint);
+      //RequestDispatcher dispatcher = request.getRequestDispatcher("/views/pointForm.jsp");
+      //dispatcher.forward(request, response);
+   }
+
+   // private void updateBook(HttpServletRequest request, HttpServletResponse
+   // response)
+   // throws SQLException, IOException {
+   // int id = Integer.parseInt(request.getParameter("id"));
+   // String title = request.getParameter("title");
+   // String author = request.getParameter("author");
+   // float price = Float.parseFloat(request.getParameter("price"));
+   //
+   // Book book = new Book(id, title, author, price);
+   // bookDAO.updateBook(book);
+   // response.sendRedirect("list");
+   // }
 
 }

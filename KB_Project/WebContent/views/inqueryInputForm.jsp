@@ -13,7 +13,7 @@
 		<h1> Management</h1>
 		<h2>
 			<form action="<c:url value="/list"/>" method="post">
-				<input type="date" name="start" /> <input type="date" name="end" />
+				<input type="date" name="start" pattern="^[0-9]{8}$"/> <input type="date" name="end" pattern="^[0-9]{8}$"/>
 				<input type="submit" name="inquery" value="조회" />
 			</form>
 		</h2>

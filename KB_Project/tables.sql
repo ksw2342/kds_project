@@ -22,3 +22,6 @@ insert into user(id,name,phone,regidate,cardnum,point)
 values('jjjung','Á¤Á¦Çõ','01022345543',now(),4037111111111111 + RAND() * 888888888888,10000000);
 insert into user(id,name,phone,regidate,cardnum,point) 
 values('kkiimm','Å´»ó¿ì','01049393302',now(),4037111111111111 + RAND() * 888888888888,10000000);
+insert into user(id,name,phone,regidate,cardnum,point) 
+values('kkssww','ÀÌ»ó¿ì','01049393302',now(),4037111111111111 + RAND() * 888888888888,10000000);
+

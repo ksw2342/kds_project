@@ -34,6 +34,7 @@
 					<li><a href="inqueryInputForm.jsp" target="screen">고객정보조회</a></li>
 					<li><a href="register.jsp" target="screen">고객등록/변경</a></li>
 					<li><a href="pointForm.jsp" target="screen">포인트정보조회</li>
+					<li><a href="tndmreq.jsp" target="screen">포인트요청테스트</li>
 				</ul></li>
 			<br>
 

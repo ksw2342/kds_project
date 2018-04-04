@@ -1,9 +1,5 @@
 package com.kbdata.jjh.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-
 public class Point {
 
 	private int u_id; // 회원일련번호
@@ -12,12 +8,10 @@ public class Point {
 	private String a_date; // 승인일
 	private String a_time; // 승인시각
 	private int mem_store_num; // 가맹점번호
-	private int division; // 차감or복원 구분
+	private String division; // 차감or복원 구분
 	private int point; // 포인트금액
 	
-	
-	
-	public Point(int u_id, int a_num, int cardnum, String a_date, String a_time, int mem_store_num, int division,
+	public Point(int u_id, int a_num, int cardnum, String a_date, String a_time, int mem_store_num, String division,
 			int point) {
 		this.u_id = u_id;
 		this.a_num = a_num;
@@ -65,10 +59,10 @@ public class Point {
 	public void setMem_store_num(int mem_store_num) {
 		this.mem_store_num = mem_store_num;
 	}
-	public int getDivision() {
+	public String getDivision() {
 		return division;
 	}
-	public void setDivision(int division) {
+	public void setDivision(String division) {
 		this.division = division;
 	}
 	public int getPoint() {
