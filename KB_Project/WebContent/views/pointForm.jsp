@@ -16,18 +16,15 @@
 			<h2>포인트사용내역조회</h2>
 		</caption>
 		<br>
-
 		<form action="<c:url value="/point"/>" method="post">
-
 			<input type="String" name="uid" placeholder="User ID" /> <input
-				type="date" name="start" /> <input type="date" name="end" /> <input
+				type="date" name="start" pattern="^[0-9]{8}$"/> <input type="date" name="end" pattern="^[0-9]{8}$"/> <input
 				type="submit" name="point" value="조회" />
 		</form>
 		<br>
 		<br>
 		<div align="center">
 			<table border="1" cellpadding="5">
-
 				<tr>
 					<th>회원일련번호</th>
 					<th>회원명</th>
@@ -35,8 +32,8 @@
 					<th>승인시각</th>
 					<th>매출승인번호</th>
 					<th>사용가맹점명</th>
-					<th>포인트금액</th>
 					<th>구분(차감/복원)</th>
+					<th>포인트금액</th>
 				</tr>
 				<c:forEach var="list" items="${listPoint}">
 					<tr>
@@ -46,14 +43,21 @@
 						<td><c:out value="${list.a_date}" /></td>
 						<td><c:out value="${list.a_time}" /></td>
 						<td><c:out value="${list.mem_store_num}" /></td>
-						<td><c:out value="${list.division}" /></td>
+						<td>
+						<c:choose>
+					        <c:when test="${list.division == 00}">
+					           차감
+					       </c:when>
+					        <c:when test="${list.division == 01}">
+					           복원
+					       </c:when>
+					    </c:choose>
+					    </td>
 						<td><c:out value="${list.point}" /></td>
 					</tr>
 				</c:forEach>
 			</table>
 		</div>
-
-
 	</center>
 
 </body>

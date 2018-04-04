@@ -73,6 +73,19 @@ public class UserDAO {
 	}
 	
 
+	public void updateUser(String u_id, String u_name, String u_phone) throws SQLException {
+	      // TODO Auto-generated method stub
+	      String sql = "UPDATE User SET name = '"+u_name+"' AND phone =  '"+u_phone+"' WHERE u_id = '"+u_id+"' ";
+	      
+	      connect();
+	      
+	      Statement statement = jdbcConnection.createStatement();
+	      statement.executeUpdate(sql);
+
+	      statement.close();
+	      disconnect();
+	}
+	
 	public List<User> listUserByDate(String start, String end) throws SQLException {
 		List<User> listUser = new ArrayList<>();
 		String sql = "select u_id, id, name, phone, regi_date, cast(card_num as character) as card_num, point from user"

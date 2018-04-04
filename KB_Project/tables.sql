@@ -72,3 +72,4 @@ insert into user(id,name,phone,regi_date,card_num,point)
 values('kb30','¼ºÀ¯¸®','01064521897',now(),4037111111111111 + RAND() * 888888888888,10000000);
 
 
+
