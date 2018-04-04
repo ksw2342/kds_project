@@ -18,7 +18,7 @@
 <div class="container">
     <div class="row">
             <div class="box clearfix">
-            <h1> Management</h1>
+            <h1 text-align: center;> Management</h1>
 		<h2>
 			<form action="<c:url value="/list"/>" method="post">
 				<input type="date" name="start" /> <input type="date" name="end" />
@@ -30,7 +30,7 @@
 		</h2>
             <div class="table-header"><div class="pull-left"></div></div>
 		<caption>
-					<h2>List of Users</h2>
+					<h2 text-align: center;>List of Users</h2>
 		</caption>
 		<table class="table table-hover bdt" id="bootstrap-table">
 			<thead>
