@@ -79,15 +79,9 @@ public class MyServlet extends HttpServlet {
 	private void listAllUser(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
 		
-		Gson gson = new Gson();
-				
 		List<User> listUser = userDao.listAllUser();
-		String test = gson.toJson(userDao.listAllUser());
-		System.out.println(test);
-		
-		request.setAttribute("listUser", test);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/views/gridtest.jsp");
-		//		RequestDispatcher dispatcher = request.getRequestDispatcher("/views/inqueryInputForm.jsp");
+		request.setAttribute("listUser", listUser);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/views/inqueryInputForm.jsp");
 		dispatcher.forward(request, response);
 	}
 
@@ -151,18 +145,4 @@ public class MyServlet extends HttpServlet {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/views/pointForm.jsp");
 		dispatcher.forward(request, response);
 	}
-
-	// private void updateBook(HttpServletRequest request, HttpServletResponse
-	// response)
-	// throws SQLException, IOException {
-	// int id = Integer.parseInt(request.getParameter("id"));
-	// String title = request.getParameter("title");
-	// String author = request.getParameter("author");
-	// float price = Float.parseFloat(request.getParameter("price"));
-	//
-	// Book book = new Book(id, title, author, price);
-	// bookDAO.updateBook(book);
-	// response.sendRedirect("list");
-	// }
-
 }

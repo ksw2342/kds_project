@@ -17,13 +17,13 @@ public class User {
 		this.phone = phone;
 	}
 
-	public User(int u_id, String id, String name, String phone, Date regidate, String cardnum, int point) {
+	public User(int u_id, String id, String name, String phone, Date regi_date, String card_num, int point) {
 		this.u_id = u_id;
 		this.id = id;
 		this.name = name;
 		this.phone = phone;
-		this.regi_date = regidate;
-		this.card_num = cardnum;
+		this.regi_date = regi_date;
+		this.card_num = card_num;
 		this.point = point;
 	}
 

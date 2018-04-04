@@ -61,8 +61,8 @@ public class UserDAO {
 							.key("id").value(rs.getString("id"))
 							.key("name").value(rs.getString("name"))
 							.key("phone").value(rs.getString("phone"))
-							.key("regidate").value(rs.getString("regidate"))
-							.key("cardnum").value(rs.getString("cardnum"))
+							.key("regi_date").value(rs.getString("regi_date"))
+							.key("card_num").value(rs.getString("card_num"))
 							.key("point").value(rs.getString("point"))
 							.endObject();
 			}
@@ -78,7 +78,7 @@ public class UserDAO {
 	
 	public List<User> listAllUser() throws SQLException{
 		List<User> listUser = new ArrayList<>();
-		String sql = "select u_id, id, name, phone, regidate, cast(cardnum as character) as cardnum, point from user";
+		String sql = "select u_id, id, name, phone, regi_date, cast(card_num as character) as card_num, point from user";
 		
 		connect();
 		
@@ -90,11 +90,11 @@ public class UserDAO {
 			String id = resultSet.getString("id");
 			String name = resultSet.getString("name");
 			String phone = resultSet.getString("phone");
-			Date regidate = resultSet.getDate("regidate");
-			String cardnum = resultSet.getString("cardnum");
+			Date regi_date = resultSet.getDate("regi_date");
+			String card_num = resultSet.getString("card_num");
 			int point = resultSet.getInt("point");
 			
-			User user = new User(u_id,id,name,phone,regidate,cardnum,point);
+			User user = new User(u_id,id,name,phone,regi_date,card_num,point);
 			listUser.add(user);
 		}
 		
@@ -104,8 +104,8 @@ public class UserDAO {
 
 	public List<User> listUserByDate(String start, String end) throws SQLException {
 		List<User> listUser = new ArrayList<>();
-		String sql = "select u_id, id, name, phone, regidate, cast(cardnum as character) as cardnum, point from user"
-				+ " where regidate between '"+start+"' and '"+end+"'";
+		String sql = "select u_id, id, name, phone, regi_date, cast(card_num as character) as card_num, point from user"
+				+ " where regi_date between '"+start+"' and '"+end+"'";
 		
 		connect();
 		
@@ -117,11 +117,11 @@ public class UserDAO {
 			String id = resultSet.getString("id");
 			String name = resultSet.getString("name");
 			String phone = resultSet.getString("phone");
-			Date regidate = resultSet.getDate("regidate");
-			String cardnum = resultSet.getString("cardnum");
+			Date regi_date = resultSet.getDate("regi_date");
+			String card_num = resultSet.getString("card_num");
 			int point = resultSet.getInt("point");
 			
-			User user = new User(u_id,id,name,phone,regidate,cardnum,point);
+			User user = new User(u_id,id,name,phone,regi_date,card_num,point);
 			listUser.add(user);
 		}
 		
@@ -134,7 +134,7 @@ public class UserDAO {
 		String id = newUser.getId();
 		String name = newUser.getName();
 		String phone = newUser.getPhone();
-		String sql ="insert into user(id,name,phone,regidate,cardnum,point) values('"+id+"','"+name+"','"+phone+"',curdate(),4037111111111111 + RAND() * 888888888888,10000000)";
+		String sql ="insert into user(id,name,phone,regi_date,card_num,point) values('"+id+"','"+name+"','"+phone+"',curdate(),4037111111111111 + RAND() * 888888888888,10000000)";
 		
 		connect();
 		

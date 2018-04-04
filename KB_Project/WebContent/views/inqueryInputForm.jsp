@@ -26,20 +26,20 @@
 			</form>
 		</h2>
             <div class="table-header"><div class="pull-left"></div></div>
-	
+		<caption>
+					<h2>List of Users</h2>
+		</caption>
 		<table class="table table-hover bdt" id="bootstrap-table">
 			<thead>
-				<caption>
-					<h2>List of Users</h2>
-				</caption>
+				
 				<tr>
-					<th>UID</th>
-					<th>ID</th>
-					<th>Name</th>
-					<th>Phone</th>
-					<th>RegiDate</th>
-					<th>CardNum</th>
-					<th>Point</th>
+					<th>회원번호</th>
+					<th>ID</th>	
+					<th>이름</th>
+					<th>연락처</th>
+					<th>등록일</th>
+					<th>카드번호</th>
+					<th>포인트</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -49,12 +49,32 @@
 					<td><c:out value="${user.id}" /></td>
 					<td><c:out value="${user.name}" /></td>
 					<td><c:out value="${user.phone}" /></td>
-					<td><c:out value="${user.regidate}" /></td>
-					<td><c:out value="${user.cardnum}" /></td>
+					<td><c:out value="${user.regi_date}" /></td>
+					<td><c:out value="${user.card_num}" /></td>
 					<td><c:out value="${user.point}" /></td>
                 </tr>
 			</c:forEach>
 		</table>
+		<div id="table-footer" class="row">
+			<div class="pull-left">
+				<form class="form-horizontal" id="page-rows-form">
+					<label class="pull-left control-label">Entries per Page:</label>
+					<div class="pull-left">
+						<select class="form-control">
+							<option value="5">5</option>
+							<option value="10" selected="selected">10</option>
+							<option value="15">15</option>
+							<option value="20">20</option>
+							<option value="25">25</option></select>
+					</div>
+				</form>
+			</div>
+		<nav class="pull-right" id="table-nav">
+			<ul class="pagination pull-right">
+				
+			</ul>
+		</nav>
+		</div>
 	</div>
 </div>
 </div>
