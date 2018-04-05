@@ -84,7 +84,6 @@ public class MyServlet extends HttpServlet {
 	
 	// TNDM �� �������� �޼ҵ� 
 	private void test(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		// TODO Auto-generated method stub
 		BufferedReader input = new BufferedReader(new InputStreamReader(request.getInputStream()));
 		StringBuilder builder = new StringBuilder();
 		String buffer;
@@ -158,7 +157,6 @@ public class MyServlet extends HttpServlet {
 	}
 
 	private void updateUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
-		// TODO Auto-generated method stub
 		  String id = request.getParameter("id");
 		  String name = request.getParameter("name");
 		  String phone = request.getParameter("phone");

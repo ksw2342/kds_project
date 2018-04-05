@@ -74,7 +74,6 @@ public class UserDAO {
 	
 
 	public void updateUser(String u_id, String u_name, String u_phone) throws SQLException {
-	      // TODO Auto-generated method stub
 	      String sql = "UPDATE User SET name = '"+u_name+"' AND phone =  '"+u_phone+"' WHERE u_id = '"+u_id+"' ";
 	      
 	      connect();
@@ -115,7 +114,6 @@ public class UserDAO {
 	
 	
 	public void insertUser(User newUser) throws SQLException{
-		// TODO Auto-generated method stub
 		String id = newUser.getId();
 		String name = newUser.getName();
 		String phone = newUser.getPhone();

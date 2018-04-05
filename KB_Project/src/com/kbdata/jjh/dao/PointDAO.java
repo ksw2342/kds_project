@@ -44,7 +44,6 @@ public class PointDAO {
    
    //포인트 사용내역 등록
    public void insertPoint(Point newPoint) throws SQLException{
-      // TODO Auto-generated method stub
 	   System.out.println("insertPoint() 호출됨");
    
       int u_id = newPoint.getU_id(); 
@@ -86,8 +85,7 @@ public class PointDAO {
       
    }
    
-   private void updateUserPoint(int user_id, int after_point) throws SQLException {
-      // TODO Auto-generated method stub
+   private void updateUserPoint(int user_id, int after_point) throws SQLException {     
       String sql = "UPDATE User SET point = '"+after_point+"' WHERE u_id = '"+user_id+"' ";
       
       connect();
